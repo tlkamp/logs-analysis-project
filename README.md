@@ -45,3 +45,10 @@ project-logs-analysis/
 
 * [`requirements.txt`](requirements.txt) - a file containing the list of all dependencies of my Python application. Can be passed to `pip install` directly to install all necessary dependencies.
 * [`reports.py`](code/reports.py) - the Python code that prints the answers to the questions above.
+
+To run the code:
+1. Copy the [`reports.py`](code/reports.py) file into the `vagrant` directory of the virtual machine.
+2. `vagrant up`
+3. `vagrant ssh`
+4. `cd /vagrant`
+5. `python reports.py`
