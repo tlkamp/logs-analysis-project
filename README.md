@@ -27,3 +27,7 @@ And those tables have the following structure/relationships:
 |------|----|--------|--------|------|----|
 |URI, contains slug of articles.   |    |HTTP methods        | HTTP response codes       |      |   PK |
 
+## Questions and Answers
+1. What are the three most popular articles of all time?
+2. Who are the most popular article authors of all time?
+3. On which days did more than 1% of requests lead to errors?
