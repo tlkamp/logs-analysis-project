@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 import psycopg2
 
 DBNAME = 'news'
@@ -17,8 +17,9 @@ CALC_PERC = """
 select * from (
   select dateerrs.date, CAST(dateerrs.errs as FLOAT)/CAST(datereqs.reqs as FLOAT) * 100 as perct
   from dateerrs join datereqs
-  on dateerrs.date = datereqs.date) as f
-  where perct >= 1;
+  on dateerrs.date = datereqs.date
+) as f
+where perct >= 1;
 """
 
 
