@@ -29,11 +29,24 @@ And those tables have the following structure/relationships:
 
 
 ## Views
-The views created are `datepathstat`
+The views created are
+
+**`datereqs`**
 
 ```sql
-create view datepathstat as
-select date(time) as date, path, status from log;
+create view datereqs as
+select date(time) as date, count(status) as reqs
+group by date;
+```
+
+**`dateerrs`**
+
+```sql
+create view dateerrs as
+select date(time) as date, count(status) as errs
+from log
+where not status = '200 OK'
+group by date;
 ```
 
 ## Questions and Answers
