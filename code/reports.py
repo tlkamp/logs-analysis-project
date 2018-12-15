@@ -25,7 +25,7 @@ where perct >= 1;
 
 def get_days_with_errs():
     print ""
-    print "2. Get days with errors greater than 1%"
+    print "3. On which days did more than 1% of requests lead to errors?"
     with psycopg2.connect(dbname=DBNAME) as db:
         cursor = db.cursor()
         cursor.execute(CALC_PERC)
