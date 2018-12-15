@@ -27,6 +27,15 @@ And those tables have the following structure/relationships:
 |------|----|--------|--------|------|----|
 |URI, contains slug of articles.   |    |HTTP methods, all are 'GET'        | HTTP response codes       |      |   PK |
 
+
+## Views
+The views created are `datepathstat`
+
+```sql
+create view datepathstat as
+select date(time) as date, path, status from log;
+```
+
 ## Questions and Answers
 1. What are the three most popular articles of all time?
 2. Who are the most popular article authors of all time?
