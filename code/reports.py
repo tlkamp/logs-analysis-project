@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import psycopg2
 
 DBNAME = 'news'
@@ -13,9 +13,28 @@ order by views desc
 limit 3;
 """
 
+CALC_PERC = """
+select * from (
+  select dateerrs.date, CAST(dateerrs.errs as FLOAT)/CAST(datereqs.reqs as FLOAT) * 100 as perct
+  from dateerrs join datereqs
+  on dateerrs.date = datereqs.date) as f
+  where perct >= 1;
+"""
+
+
+def get_days_with_errs():
+    print ""
+    print "2. Get days with errors greater than 1%"
+    with psycopg2.connect(dbname=DBNAME) as db:
+        cursor = db.cursor()
+        cursor.execute(CALC_PERC)
+        for date, perc in cursor.fetchall():
+            print str(date), '--', '{0:.2f}%'.format(perc)
+
 
 def get_three_most_pop():
-    print "\n1. What are the most popular three articles of all time?"
+    print ""
+    print "1. What are the most popular three articles of all time?"
     with psycopg2.connect(dbname=DBNAME) as db:
         cursor = db.cursor()
         cursor.execute(MOST_POP_3_ART)
@@ -25,3 +44,4 @@ def get_three_most_pop():
 
 if __name__ == "__main__":
     get_three_most_pop()
+    get_days_with_errs()
