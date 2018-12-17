@@ -69,4 +69,4 @@ To run the code:
 2. `vagrant up`
 3. `vagrant ssh`
 4. `cd /vagrant`
-5. `python reports.py`
+5. `python reports.py` or just `./reports.py`
