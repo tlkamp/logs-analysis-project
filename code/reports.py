@@ -31,6 +31,16 @@ where perct >= 1;
 """
 
 
+def rank_authors_popularity():
+    print ""
+    print "2. Who are the most popular article authors of all time?"
+    with psycopg2.connect(dbname=DBNAME) as db:
+        cursor = db.cursor()
+        cursor.execute(RANK_AUTHORS_POP)
+        for author_name, total_views in cursor.fetchall():
+            print author_name, '--', views
+
+
 def get_days_with_errs():
     print ""
     print "3. On which days did more than 1% of requests lead to errors?"
