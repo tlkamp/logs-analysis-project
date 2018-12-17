@@ -47,11 +47,6 @@ select authors.name, articles.slug from authors, articles
 where authors.id = articles.author;
 ```
 
-## Questions and Answers
-1. What are the three most popular articles of all time?
-2. Who are the most popular article authors of all time?
-3. On which days did more than 1% of requests lead to errors?
-
 ## Running the Python Code
 The project has the following structure:
 
@@ -70,3 +65,11 @@ To run the code:
 3. `vagrant ssh`
 4. `cd /vagrant`
 5. `python reports.py` or just `./reports.py`
+
+## Understanding the Output
+The output of the code varies _slightly_, depending on whether or not the views were 
+created before the program was run (perhaps by running `psql` commands).
+
+Both versions of the output are included:
+  * [Output indicating creation of views](output-1.txt)
+  * [Output indicating views already exist](output-2.txt)
