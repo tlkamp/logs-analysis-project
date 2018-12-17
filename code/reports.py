@@ -38,7 +38,7 @@ def rank_authors_popularity():
         cursor = db.cursor()
         cursor.execute(RANK_AUTHORS_POP)
         for author_name, total_views in cursor.fetchall():
-            print author_name, '--', views
+            print author_name, '--', total_views
 
 
 def get_days_with_errs():
