@@ -64,6 +64,12 @@ select path, count(path) from okpaths
 group by path;
 ```
 
+**`authortoarticle`**
+create view authortoarticle as
+select authors.name, articles.slug from authors, articles
+where authors.id = articles.author;
+```
+
 ## Questions and Answers
 1. What are the three most popular articles of all time?
 2. Who are the most popular article authors of all time?
