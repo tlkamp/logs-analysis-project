@@ -89,7 +89,7 @@ def do_setup():
                 if view_name not in existing:
                     print "\t", view_name, "does not exist, creating it now..."
                     cursor.execute(DB_VIEW_Q[view_name])
-                    cursor.commit()
+                    db.commit()
                 else:
                     print "\t", view_name, "exists, continuing..."
 
