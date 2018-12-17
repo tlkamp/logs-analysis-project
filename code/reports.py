@@ -1,7 +1,54 @@
 #!/usr/bin/env python2
 import psycopg2
 
+# View definitions
+DATEREQS = """
+create view datereqs as
+select date(time) as date, count(status) as reqs
+group by date;
+"""
+
+DATEERRS = """
+create view dateerrs as
+select date(time) as date, count(status) as errs
+from log
+where not status = '200 OK'
+group by date;
+"""
+
+OKPATHS = """
+create view okpaths as
+select path from log where status = '200 OK';
+"""
+
+TOTALVIEWS = """
+create view totalviews as
+select path, count(path) from okpaths
+group by path;
+"""
+
+AUTHORTOARTICLE = """
+create view authortoarticle as
+select authors.name, articles.slug from authors, articles
+where authors.id = articles.author;
+"""
+
+DB_VIEW_Q = {
+    'datereqs': DATEREQS,
+    'dateerrs': DATEERRS,
+    'okpaths': OKPATHS,
+    'totalviews': TOTALVIEWS,
+    'authortoarticle': AUTHORTOARTICLE
+}
+
 DBNAME = 'news'
+
+# Queries
+GET_VIEWS = """
+select table_name
+from INFORMATION_SCHEMA.views
+WHERE table_schema = ANY (current_schemas(false));
+"""
 
 MOST_POP_3_ART = """
 select articles.title, count(articles.title) as views
@@ -31,6 +78,21 @@ where perct >= 1;
 """
 
 
+def do_setup():
+    print "Checking for user-created views..."
+    with psycopg2.connect(dbname=DBNAME) as db:
+        cursor = db.cursor()
+        cursor.execute(GET_VIEWS)
+        existing = [x[0] for x in cursor.fetchall()]
+        for view_name in DB_VIEW_Q.keys():
+            if view_name not in existing:
+                print "\t", view_name, "does not exist, creating it now..."
+                cursor.execute(DB_VIEW_Q[view_name])
+                cursor.commit()
+            else:
+                print "\t", view_name, "exists, continuing..."
+
+
 def rank_authors_popularity():
     print ""
     print "2. Who are the most popular article authors of all time?"
@@ -38,7 +100,7 @@ def rank_authors_popularity():
         cursor = db.cursor()
         cursor.execute(RANK_AUTHORS_POP)
         for author_name, total_views in cursor.fetchall():
-            print author_name, '--', total_views
+            print "\t", author_name, '--', total_views
 
 
 def get_days_with_errs():
@@ -48,7 +110,7 @@ def get_days_with_errs():
         cursor = db.cursor()
         cursor.execute(CALC_PERC)
         for date, perc in cursor.fetchall():
-            print str(date), '--', '{0:.2f}%'.format(perc)
+            print "\t", str(date), '--', '{0:.2f}%'.format(perc)
 
 
 def get_three_most_pop():
@@ -58,10 +120,11 @@ def get_three_most_pop():
         cursor = db.cursor()
         cursor.execute(MOST_POP_3_ART)
         for title, views in cursor.fetchall():
-            print '"' + title + '"', '--', views, "views"
+            print "\t", '"' + title + '"', '--', views, "views"
 
 
 if __name__ == "__main__":
+    do_setup()
     get_three_most_pop()
     rank_authors_popularity()
     get_days_with_errs()
