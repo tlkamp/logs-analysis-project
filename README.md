@@ -2,7 +2,9 @@
 Gathering insights from a relational database via SQL queries and Python.
 
 ## Views
-The views created are
+The Python code in [`reports.py`](code/reports.py) makes use of several views within the `news` database. **If the views do not exist at runtime, the program will create them.**
+
+The views created by the program are:
 
 **`datereqs`**
 
