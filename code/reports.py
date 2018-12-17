@@ -13,6 +13,14 @@ order by views desc
 limit 3;
 """
 
+RANK_AUTHORS_POP = """
+select authortoarticle.name, sum(totalviews.count) as views
+from authortoarticle, totalviews
+where totalviews.path like concat('%', authortoarticle.slug)
+group by authortoarticle.name
+order by views desc;
+"""
+
 CALC_PERC = """
 select * from (
   select dateerrs.date, CAST(dateerrs.errs as FLOAT)/CAST(datereqs.reqs as FLOAT) * 100 as perct
