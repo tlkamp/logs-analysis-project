@@ -60,7 +60,6 @@ project-logs-analysis/
 ├── README.md
 ├── code
 │   └── reports.py
-└── requirements.txt
 ```
 
 * [`requirements.txt`](requirements.txt) - a file containing the list of all dependencies of my Python application. Can be passed to `pip install` directly to install all necessary dependencies.
