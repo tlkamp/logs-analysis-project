@@ -65,7 +65,7 @@ project-logs-analysis/
 * [`reports.py`](code/reports.py) - the Python code that prints the answers to the questions above.
 
 To run the code:
-1. Copy the [`reports.py`](code/reports.py) file into the `vagrant` directory of the virtual machine.
+1. Copy the [`reports.py`](code/reports.py) file into the `vagrant` directory of the virtual machine project.
 2. `vagrant up`
 3. `vagrant ssh`
 4. `cd /vagrant`
