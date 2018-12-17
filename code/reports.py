@@ -63,4 +63,5 @@ def get_three_most_pop():
 
 if __name__ == "__main__":
     get_three_most_pop()
+    rank_authors_popularity()
     get_days_with_errs()
