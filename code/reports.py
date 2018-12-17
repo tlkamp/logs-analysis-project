@@ -81,16 +81,17 @@ where perct >= 1;
 def do_setup():
     print "Checking for user-created views..."
     with psycopg2.connect(dbname=DBNAME) as db:
+        print ""
         cursor = db.cursor()
         cursor.execute(GET_VIEWS)
         existing = [x[0] for x in cursor.fetchall()]
         for view_name in DB_VIEW_Q.keys():
-            if view_name not in existing:
-                print "\t", view_name, "does not exist, creating it now..."
-                cursor.execute(DB_VIEW_Q[view_name])
-                cursor.commit()
-            else:
-                print "\t", view_name, "exists, continuing..."
+                if view_name not in existing:
+                    print "\t", view_name, "does not exist, creating it now..."
+                    cursor.execute(DB_VIEW_Q[view_name])
+                    cursor.commit()
+                else:
+                    print "\t", view_name, "exists, continuing..."
 
 
 def rank_authors_popularity():
@@ -128,3 +129,4 @@ if __name__ == "__main__":
     get_three_most_pop()
     rank_authors_popularity()
     get_days_with_errs()
+    print ""
