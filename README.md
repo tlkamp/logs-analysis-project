@@ -65,6 +65,8 @@ group by path;
 ```
 
 **`authortoarticle`**
+
+```sql
 create view authortoarticle as
 select authors.name, articles.slug from authors, articles
 where authors.id = articles.author;
