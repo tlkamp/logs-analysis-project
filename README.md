@@ -49,6 +49,21 @@ where not status = '200 OK'
 group by date;
 ```
 
+**`okpaths`**
+
+```sql
+create view okpaths as
+select path from log where status = '200 OK';
+```
+
+**`totalviews`**
+
+```sql
+create view totalviews as
+select path, count(path) from okpaths
+group by path;
+```
+
 ## Questions and Answers
 1. What are the three most popular articles of all time?
 2. Who are the most popular article authors of all time?
