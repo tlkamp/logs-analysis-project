@@ -71,7 +71,8 @@ order by views desc;
 
 CALC_PERC = """
 select * from (
-  select dateerrs.date, CAST(dateerrs.errs as FLOAT)/CAST(datereqs.reqs as FLOAT) * 100 as perct
+  select dateerrs.date,
+  CAST(dateerrs.errs as FLOAT)/CAST(datereqs.reqs as FLOAT) * 100 as perct
   from dateerrs join datereqs
   on dateerrs.date = datereqs.date
 ) as f
