@@ -60,11 +60,14 @@ project-logs-analysis/
 * [`reports.py`](code/reports.py) - the Python code that prints the answers to the questions above.
 
 To run the code:
-1. Copy the [`reports.py`](code/reports.py) file into the `vagrant` directory of the [`fullstack-nanodegree-vm` project](https://github.com/udacity/fullstack-nanodegree-vm).
-2. `vagrant up`
-3. `vagrant ssh`
-4. `cd /vagrant`
-5. `python reports.py` or just `./reports.py`
+1. Ensure the [`fullstack-nanodegree-vm` project](https://github.com/udacity/fullstack-nanodegree-vm) project has been 
+downloaded.
+2. Ensure [VirtualBox](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com/) have been installed.
+3. Copy the [`reports.py`](code/reports.py) file into the `vagrant` directory of the [`fullstack-nanodegree-vm` project](https://github.com/udacity/fullstack-nanodegree-vm).
+4. `vagrant up`
+5. `vagrant ssh`
+6. `cd /vagrant`
+7. `python reports.py` or just `./reports.py`
 
 ## Understanding the Output
 The output of the code varies _slightly_, depending on whether or not the views were 
